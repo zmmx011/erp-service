@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  erpservice:
+    image: kds.inveniacorp.com/dev/erp-service:latest
+    networks:
+      - msa
+    #restart: on-failure
+    ports:
+      - "8010:8010"
+    environment:
+      PROFILE: "default"
+      SERVER_PORT: "8010"
+      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
+      EUREKASERVER_PORT: "8761"
+      CONFIGSERVER_URI: "http://configserver:8888"
+      CONFIGSERVER_PORT: "8888"
+      ENCRYPT_KEY: "damu"
+    build:
+      context: .
+networks:
+  msa:
+    external: true
+    name: msa

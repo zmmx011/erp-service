@@ -1,0 +1,30 @@
+server:
+  port: 8010
+management:
+  endpoint:
+    health:
+      show-details: always # actuator에서 디테일한 정보들을 확인하기 위해 설정
+  health:
+    diskspace:
+      enabled: true
+eureka:
+  instance:
+    preferIpAddress: true # 서비스 이름 대신 서비스 IP주소 등록
+  client:
+    registerWithEureka: true # 유레카에 서비스 등록
+    fetchRegistry: true # 레지스트리 사본을 로컬로 캐시한다
+    serviceUrl:
+      defaultZone: ${EUREKASERVER_URI:http://localhost:8761/eureka} # 유레카 서비스 위치
+spring:
+  application:
+    name: erp-service
+  config:
+    import: "optional:configserver:"
+  cloud:
+    inetutils:
+      ignored-interfaces:
+        - eth0*
+        - eth2*
+    config:
+      discovery:
+        enabled: true # 유레카에서 검색
