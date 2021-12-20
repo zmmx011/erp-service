@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   erpservice:
-    image: kds.inveniacorp.com/dev/erp-service:latest
+    image: kds.inveniacorp.com/dev/erp-service/erp-service:latest
     networks:
       - msa
     #restart: on-failure
