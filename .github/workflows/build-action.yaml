@@ -20,7 +20,7 @@ jobs:
         with:
           registry: kds.inveniacorp.com
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.TOKEN }}
+          password: ${{ secrets.PACKAGE }}
       - name: Docker Compose Build
         run: docker-compose build apigateway
       - name: Docker Push
