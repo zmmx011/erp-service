@@ -8,14 +8,12 @@ import org.keycloak.admin.client.resource.RealmResource;
 import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.util.Assert;
 
 @SpringBootTest
-class ErpServiceApplicationTests {
-
-  @Test
-  void contextLoads() {
-
-  }
+@ActiveProfiles("dev")
+class KeycloakAdminClientTests {
 
   @Test
   void findUserByUsername() {
@@ -25,6 +23,6 @@ class ErpServiceApplicationTests {
 
     List<UserRepresentation> users = usersResource.search("test", true);
 
-    System.out.println(users);
+    Assert.notEmpty(users, "Collection must contain elements");
   }
 }
