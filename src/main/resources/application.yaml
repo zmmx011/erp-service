@@ -1,33 +1,9 @@
 # Default settings
 server:
   port: 8010
----
-# Development settings
-spring:
-  config:
-    activate:
-      on-profile: dev
-  jpa:
-    show-sql: true
-    generate-ddl: false
-    hibernate:
-      ddl-auto: none
-  datasource:
-    url: "jdbc:mariadb://100.100.10.177:3306/INVENIA_DEV"
-    driver-class-name: "org.mariadb.jdbc.Driver"
-    username: "e1264"
-    password: "inveni@2020"
-  cloud:
-    config:
-      enabled: false
-
----
-# Product settings
 spring:
   config:
     import: "optional:configserver:"
-    activate:
-      on-profile: prod
   application:
     name: erp-service
   cloud:
