@@ -1,5 +1,43 @@
+# Default settings
 server:
   port: 8010
+---
+# Development settings
+spring:
+  config:
+    activate:
+      on-profile: dev
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: "jdbc:mariadb://100.100.10.177:3306/INVENIA_DEV"
+    driver-class-name: "org.mariadb.jdbc.Driver"
+    username: "e1264"
+    password: "inveni@2020"
+  cloud:
+    config:
+      enabled: false
+
+---
+# Product settings
+spring:
+  config:
+    import: "optional:configserver:"
+    activate:
+      on-profile: prod
+  application:
+    name: erp-service
+  cloud:
+    inetutils:
+      ignored-interfaces:
+        - eth0*
+        - eth2*
+    config:
+      discovery:
+        enabled: true # 유레카에서 검색
 management:
   endpoint:
     health:
@@ -15,16 +53,5 @@ eureka:
     fetchRegistry: true # 레지스트리 사본을 로컬로 캐시한다
     serviceUrl:
       defaultZone: ${EUREKASERVER_URI:http://localhost:8761/eureka} # 유레카 서비스 위치
-spring:
-  application:
-    name: erp-service
-  config:
-    import: "optional:configserver:"
-  cloud:
-    inetutils:
-      ignored-interfaces:
-        - eth0*
-        - eth2*
-    config:
-      discovery:
-        enabled: true # 유레카에서 검색
+
+
