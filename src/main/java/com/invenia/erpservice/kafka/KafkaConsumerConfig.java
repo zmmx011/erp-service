@@ -17,7 +17,7 @@ public class KafkaConsumerConfig {
   @Bean
   public Map<String, Object> consumerProperties() {
     return Map.of(
-        ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "https://kafka.inveniacorp.com:9092",
+        ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "http://100.100.10.174:9092",
         ConsumerConfig.GROUP_ID_CONFIG, "testGroup",
         ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class,
         ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);

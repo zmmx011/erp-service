@@ -1,5 +1,7 @@
 package com.invenia.erpservice;
 
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+
 import com.invenia.erpservice.keycloak.KeycloakService;
 import com.invenia.erpservice.keycloak.dto.user.Credential;
 import com.invenia.erpservice.keycloak.dto.user.UserRepresentation;
@@ -10,8 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-@SpringBootTest
 @ActiveProfiles("dev")
+@SpringBootTest(classes = ErpServiceApplication.class,
+    // Normally spring.cloud.config.enabled:true is the default but since we have the config server on the classpath
+    // we need to set it explicitly.
+    properties = {
+        "spring.cloud.config.discovery.enabled:false",
+    },
+    webEnvironment = RANDOM_PORT)
 class KeycloakAPITests {
 
   @Autowired
