@@ -1,10 +1,10 @@
 package com.invenia.erpservice.keycloak;
 
-import com.invenia.erpservice.keycloak.dto.user.UserRepresentation;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -30,21 +30,21 @@ public class KeycloakService {
         .block();
   }
 
-  public HttpStatus createUser(UserRepresentation userRepresentation) {
+  public HttpStatus createUser(UserRepresentation user) {
     WebClient.ResponseSpec response = webClient
         .post()
         .uri("/users")
-        .body(Mono.just(userRepresentation), UserRepresentation.class)
+        .body(Mono.just(user), UserRepresentation.class)
         .retrieve();
 
     return Optional.of(Objects.requireNonNull(response.toBodilessEntity().block()).getStatusCode()).get();
   }
 
-  public HttpStatus updateUser(UserRepresentation userRepresentation, String userId) {
+  public HttpStatus updateUser(UserRepresentation user, String userId) {
     WebClient.ResponseSpec response = webClient
         .put()
         .uri("/users/" + userId)
-        .body(Mono.just(userRepresentation), UserRepresentation.class)
+        .body(Mono.just(user), UserRepresentation.class)
         .retrieve();
 
     return Optional.of(Objects.requireNonNull(response.toBodilessEntity().block()).getStatusCode()).get();

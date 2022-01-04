@@ -1,25 +1,17 @@
 package com.invenia.erpservice;
 
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
-
 import com.invenia.erpservice.keycloak.KeycloakService;
-import com.invenia.erpservice.keycloak.dto.user.Credential;
-import com.invenia.erpservice.keycloak.dto.user.UserRepresentation;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.keycloak.representations.idm.CredentialRepresentation;
+import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles("dev")
-@SpringBootTest(classes = ErpServiceApplication.class,
-    // Normally spring.cloud.config.enabled:true is the default but since we have the config server on the classpath
-    // we need to set it explicitly.
-    properties = {
-        "spring.cloud.config.discovery.enabled:false",
-    },
-    webEnvironment = RANDOM_PORT)
+@SpringBootTest(classes = ErpServiceApplication.class, properties = {"spring.cloud.config.discovery.enabled:false"})
 class KeycloakAPITests {
 
   @Autowired
@@ -32,19 +24,19 @@ class KeycloakAPITests {
 
   @Test
   void createUserTest() {
-    UserRepresentation user = new UserRepresentation();
-    user.setUsername("test10");
-    user.setEnabled(true);
-    user.setFirstName("test10");
-    user.setEmail("test10@co.kr");
+    // 인증 정보
+    CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
+    credentialRepresentation.setValue("test10");
 
-    List<Credential> credentials = new ArrayList<>();
-    Credential credential = new Credential();
-    credential.setValue("test10");
-    credentials.add(credential);
-    user.setCredentials(credentials);
+    // 유저 정보
+    UserRepresentation userRepresentation = new UserRepresentation();
+    userRepresentation.setUsername("test");
+    userRepresentation.setFirstName("test");
+    userRepresentation.setEmail("test10@co.kr");
+    userRepresentation.setEnabled(true); // 18004 : 영구중지
+    userRepresentation.setCredentials(List.of(credentialRepresentation));
 
-    System.out.println(keycloakService.createUser(user));
+    HttpStatus response = keycloakService.createUser(userRepresentation);
   }
 
   @Test
@@ -54,7 +46,7 @@ class KeycloakAPITests {
     if (!users.isEmpty()) {
       UserRepresentation user = users.get(0);
       user.setFirstName("updatedName10");
-      System.out.println(keycloakService.updateUser(user, user.getId()));
+      HttpStatus response = keycloakService.updateUser(user, user.getId());
     }
   }
 }

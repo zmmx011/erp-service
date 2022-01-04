@@ -14,7 +14,6 @@ spring:
     config:
       discovery:
         enabled: true # 유레카에서 검색
-
 management:
   endpoint:
     health:
