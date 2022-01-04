@@ -4,13 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.invenia.erpservice.kafka.user.dto.UserPayload;
 import com.invenia.erpservice.kafka.user.dto.UserTopic;
-import com.invenia.erpservice.keycloak.KeycloakService;
+import com.invenia.erpservice.keycloak.KeycloakAdminService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
-import org.springframework.http.HttpStatus;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.listener.AbstractConsumerSeekAware;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserConsumer extends AbstractConsumerSeekAware {
 
-  private final KeycloakService keycloakService;
+  private final KeycloakAdminService keycloakAdminService;
 
   @KafkaListener(topics = "erp_TCAUser")
   public void consumeTCAUser(String message) {
@@ -48,14 +47,14 @@ public class UserConsumer extends AbstractConsumerSeekAware {
     userRepresentation.setEnabled(payload.getLoginStatus() != 18004); // 18004 : 영구중지
     userRepresentation.setCredentials(List.of(credentialRepresentation));
 
-    List<UserRepresentation> foundUsers = keycloakService.getUserByUserName(userRepresentation.getUsername());
+    List<UserRepresentation> foundUsers = keycloakAdminService.getUserByUserName(userRepresentation.getUsername());
 
     if (foundUsers.isEmpty()) {
-      HttpStatus response = keycloakService.createUser(userRepresentation);
-      log.info("Create User Response ==> {}", response);
+      keycloakAdminService.createUser(userRepresentation);
+      log.info("{} User create.", userRepresentation.getUsername());
     } else {
-      HttpStatus response = keycloakService.updateUser(userRepresentation, foundUsers.get(0).getId());
-      log.info("Update User Response ==> {}", response);
+      keycloakAdminService.updateUser(foundUsers.get(0).getId(), userRepresentation);
+      log.info("{} User update.", userRepresentation.getUsername());
     }
   }
 }

@@ -1,6 +1,6 @@
 # Default settings
 server:
-  port: 8010
+  port: 2222
 spring:
   config:
     import: "optional:configserver:"
