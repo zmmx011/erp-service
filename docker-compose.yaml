@@ -4,11 +4,11 @@ services:
     image: kds.inveniacorp.com/dev/erp-service/erp-service:latest
     networks:
       - msa
-    #restart: on-failure
     ports:
       - "8010:8010"
     environment:
-      PROFILE: "default"
+      TZ: "Asia/Seoul"
+      SPRING_PROFILES_ACTIVE: dev
       SERVER_PORT: "8010"
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
       EUREKASERVER_PORT: "8761"
@@ -16,8 +16,6 @@ services:
       CONFIGSERVER_PORT: "8888"
       ENCRYPT_KEY: "damu"
     build:
-      args:
-        profile: "dev"
       context: .
 networks:
   msa:

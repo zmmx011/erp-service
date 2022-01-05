@@ -22,6 +22,6 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.PACKAGE }}
       - name: Docker Compose Build
-        run: docker-compose build --build-arg profile=prod erpservice
+        run: docker-compose build erpservice
       - name: Docker Push
         run: docker push kds.inveniacorp.com/${{ github.repository }}/erp-service:latest
