@@ -16,6 +16,8 @@ services:
       CONFIGSERVER_PORT: "8888"
       ENCRYPT_KEY: "damu"
     build:
+      args:
+        profile: "dev"
       context: .
 networks:
   msa:

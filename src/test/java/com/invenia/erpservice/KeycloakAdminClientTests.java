@@ -1,10 +1,7 @@
 package com.invenia.erpservice;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import com.invenia.erpservice.keycloak.KeycloakAdminService;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.keycloak.representations.idm.CredentialRepresentation;
