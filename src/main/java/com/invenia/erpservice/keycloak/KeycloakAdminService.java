@@ -4,7 +4,9 @@ package com.invenia.erpservice.keycloak;
 import java.util.List;
 import javax.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
-import org.keycloak.admin.client.Keycloak;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.keycloak.OAuth2Constants;
+import org.keycloak.admin.client.KeycloakBuilder;
 import org.keycloak.admin.client.resource.RealmResource;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.stereotype.Service;
@@ -15,9 +17,20 @@ public class KeycloakAdminService {
 
   private final RealmResource realmResource;
 
-  public KeycloakAdminService() {
-    Keycloak keycloak = KeycloakAdminClientConfig.getInstance();
-    realmResource = keycloak.realm(KeycloakAdminClientConfig.realm);
+  public KeycloakAdminService(KeycloakAdminConfig config) {
+    log.info("Keycloak Config ==> {}", config.toString());
+    realmResource = KeycloakBuilder.builder()
+        .serverUrl(config.getAuthServerUrl())
+        .realm(config.getRealm())
+        .grantType(OAuth2Constants.CLIENT_CREDENTIALS)
+        .clientId(config.getClientId())
+        .clientSecret(config.getClientSecret())
+        .resteasyClient(
+            new ResteasyClientBuilder()
+                .connectionPoolSize(10).build()
+        )
+        .build()
+        .realm(config.getRealm());
   }
 
   public List<UserRepresentation> getUserByUserName(String username) {
