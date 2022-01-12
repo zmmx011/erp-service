@@ -27,7 +27,7 @@ public class KeycloakAdminService {
         .clientSecret(config.getClientSecret())
         .resteasyClient(
             new ResteasyClientBuilder()
-                .connectionPoolSize(10).build()
+                .connectionPoolSize(100).build()
         )
         .build()
         .realm(config.getRealm());

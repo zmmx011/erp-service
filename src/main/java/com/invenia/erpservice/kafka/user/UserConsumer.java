@@ -56,5 +56,7 @@ public class UserConsumer extends AbstractConsumerSeekAware {
       keycloakAdminService.updateUser(foundUsers.get(0).getId(), userRepresentation);
       log.info("{} User update.", userRepresentation.getUsername());
     }
+
+    log.info("done");
   }
 }

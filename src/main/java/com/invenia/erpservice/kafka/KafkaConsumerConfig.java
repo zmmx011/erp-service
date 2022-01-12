@@ -25,7 +25,7 @@ public class KafkaConsumerConfig {
         ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "25000",
         ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000",
         ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true",
-        ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "2"
+        ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "500"
     );
   }
 
