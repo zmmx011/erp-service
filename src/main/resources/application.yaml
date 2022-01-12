@@ -22,8 +22,6 @@ management:
     diskspace:
       enabled: true
 eureka:
-  instance:
-    preferIpAddress: true # 서비스 이름 대신 서비스 IP주소 등록
   client:
     registerWithEureka: true # 유레카에 서비스 등록
     fetchRegistry: true # 레지스트리 사본을 로컬로 캐시한다
