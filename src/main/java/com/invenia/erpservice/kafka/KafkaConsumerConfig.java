@@ -20,7 +20,13 @@ public class KafkaConsumerConfig {
         ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "http://100.100.10.174:9092",
         ConsumerConfig.GROUP_ID_CONFIG, "erpGroup",
         ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class,
-        ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class,
+        ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, "300000",
+        ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "25000",
+        ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000",
+        ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true",
+        ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "2"
+    );
   }
 
   @Bean
