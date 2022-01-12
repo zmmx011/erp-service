@@ -6,6 +6,7 @@ import com.invenia.erpservice.kafka.user.dto.UserPayload;
 import com.invenia.erpservice.kafka.user.dto.UserTopic;
 import com.invenia.erpservice.keycloak.KeycloakAdminService;
 import java.util.List;
+import javax.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.representations.idm.CredentialRepresentation;
@@ -50,11 +51,11 @@ public class UserConsumer extends AbstractConsumerSeekAware {
     List<UserRepresentation> foundUsers = keycloakAdminService.getUserByUserName(userRepresentation.getUsername());
 
     if (foundUsers.isEmpty()) {
-      keycloakAdminService.createUser(userRepresentation);
-      log.info("{} User create.", userRepresentation.getUsername());
+      Response response = keycloakAdminService.createUser(userRepresentation);
+      log.info("{} User create. {}", userRepresentation.getUsername(), response);
     } else {
       keycloakAdminService.updateUser(foundUsers.get(0).getId(), userRepresentation);
-      log.info("{} User update.", userRepresentation.getUsername());
+      log.info("{} User update.", foundUsers.get(0).getUsername());
     }
 
     log.info("done");
