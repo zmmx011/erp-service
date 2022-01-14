@@ -1,6 +1,7 @@
 package com.invenia.erpservice.user;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.representations.idm.UserRepresentation;
@@ -25,13 +26,12 @@ public class UserController {
 
   @GetMapping("/all-sync")
   public ResponseEntity<String> allSync() {
-    log.info("allSync");
     ModelMapper modelMapper = new ModelMapper();
+    AtomicInteger cnt = new AtomicInteger();
     userService.getUsers().forEach(user -> {
-      log.info(String.valueOf(user));
       UserRepresentation userRepresentation = modelMapper.map(user, UserRepresentation.class);
-      log.info(String.valueOf(userRepresentation));
+      log.info("{} - {} - {}", cnt.getAndIncrement(), user.getUserId(), userRepresentation.getAttributes());
     });
-    return ResponseEntity.ok().body("");
+    return ResponseEntity.ok().body(String.valueOf(cnt));
   }
 }

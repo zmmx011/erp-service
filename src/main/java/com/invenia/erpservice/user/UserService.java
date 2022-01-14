@@ -22,7 +22,4 @@ public class UserService {
     return userRepository.save(user);
   }
 
-/*  public void deleteUser(String email) {
-    userRepository.deleteByEmail(email);
-  }*/
 }
