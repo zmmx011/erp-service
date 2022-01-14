@@ -2,11 +2,19 @@ plugins {
     id 'org.springframework.boot' version '2.6.0'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'com.google.cloud.tools.jib' version '3.1.4'
 }
 
 group = 'com.invenia'
 version = '0.0.1'
 sourceCompatibility = '17'
+targetCompatibility = '17'
+
+jib {
+    from.image = 'eclipse-temurin:17.0.1_12-jre-alpine'
+    to.image = 'kds.inveniacorp.com/dev/erp-service/erp-service'
+    to.tags = ['latest']
+}
 
 configurations {
     compileOnly {

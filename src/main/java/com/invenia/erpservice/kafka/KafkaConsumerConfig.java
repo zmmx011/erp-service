@@ -23,7 +23,7 @@ public class KafkaConsumerConfig {
         ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class,
         ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, "300000",
         ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "25000",
-        ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000",
+        ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1001",
         ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true",
         ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "100"
     );

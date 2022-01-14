@@ -15,8 +15,6 @@ services:
       CONFIGSERVER_URI: "http://configserver:8888"
       CONFIGSERVER_PORT: "8888"
       ENCRYPT_KEY: "damu"
-    build:
-      context: .
 networks:
   msa:
     external: true
