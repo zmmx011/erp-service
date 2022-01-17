@@ -42,7 +42,6 @@ dependencies {
     implementation 'org.springframework.kafka:spring-kafka'
     implementation 'org.keycloak:keycloak-admin-client:16.1.0'
     implementation 'org.keycloak:keycloak-adapter-core:16.1.0'
-    implementation 'org.modelmapper:modelmapper:2.4.5'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'

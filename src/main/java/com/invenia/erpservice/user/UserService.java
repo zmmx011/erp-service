@@ -2,8 +2,10 @@ package com.invenia.erpservice.user;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -11,15 +13,8 @@ public class UserService {
   private final UserRepository userRepository;
 
   public List<User> getUsers() {
-    return userRepository.findAll();
+    List<User> users = userRepository.findAll();
+    log.info("Find User Count : {}", users.size());
+    return users;
   }
-
-  public User createUser(User user) {
-    return userRepository.save(user);
-  }
-
-  public User updateUser(User user) {
-    return userRepository.save(user);
-  }
-
 }
