@@ -1,4 +1,4 @@
-package com.invenia.erpservice.kafka.user.dto;
+package com.invenia.erpservice.kafka.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
@@ -36,7 +36,7 @@ public class UserPayload {
   private int managementType;
   private int empSeq;
   private String loginDate;
-  private Object loginFailFirstTime;
+  private long loginFailFirstTime;
   private long lastDateTime;
   private String pwdChgDate;
   private String userId;

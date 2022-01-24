@@ -1,7 +1,6 @@
 package com.invenia.erpservice.user;
 
 import com.invenia.erpservice.keycloak.KeycloakAdminService;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +17,6 @@ public class UserController {
   private final UserService userService;
 
   private final KeycloakAdminService keycloakAdminService;
-
-  @GetMapping("/")
-  public ResponseEntity<List<User>> getUsers() {
-    return ResponseEntity.ok().body(userService.getUsers());
-  }
 
   @GetMapping("/all-sync")
   public ResponseEntity<String> allSync() {
