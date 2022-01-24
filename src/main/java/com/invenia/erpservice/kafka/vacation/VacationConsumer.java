@@ -54,10 +54,8 @@ public class VacationConsumer {
             + LocalDate.parse(payload.getWkToDate(), DateTimeFormatter.BASIC_ISO_DATE);
       }
 
-      log.info(text);
-
       Message message = Message.builder()
-          .channelId("qi7yefa7kfyr5kj8nkguejna9o")
+          .channelId("wjowika97tbqxd31sgjmddqier")
           .message("")
           .props(Props.builder()
               .attachment(AttachmentsItem.builder()
