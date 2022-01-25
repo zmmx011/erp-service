@@ -65,6 +65,9 @@ public class VacationConsumer {
             .attachment(AttachmentsItem.builder()
                 .title(userName + "님의 새로운 휴가 일정이 등록되었습니다.")
                 .text(text)
+                .footer("KSystem ver.5 Genuine")
+                .footerIcon(
+                    "https://slack.inveniacorp.com/files/m7wpn3sqo7d38b77wkjf4y35uy/public?h=uhctjlt6cQOdB22rd3gQklyPuj6zRAW8b7QPkSj6bNU")
                 .build())
             .build())
         .build();
