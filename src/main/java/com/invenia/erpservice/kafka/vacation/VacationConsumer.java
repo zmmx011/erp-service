@@ -39,6 +39,11 @@ public class VacationConsumer {
     }
 
     VacationPayload payload = topic.getPayload();
+
+    if (LocalDate.parse(payload.getWkFrDate(), DateTimeFormatter.BASIC_ISO_DATE).isBefore(LocalDate.now())) {
+      return;
+    }
+
     UserEntity user = userService.getUserByEmpSeq(payload.getEmpSeq()).orElseThrow(UserNotFoundException::new);
 
     if (user.getDeptSeq() == 2039) { // IT 개발파트
