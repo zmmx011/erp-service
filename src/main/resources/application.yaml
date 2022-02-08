@@ -6,6 +6,11 @@ spring:
     import: "optional:configserver:"
   application:
     name: erp-service
+  rabbitmq:
+    host: ${RABBITMQ_HOST:127.0.0.1}
+    port: 5672
+    username: admin
+    password: inveni@2021
   cloud:
     inetutils:
       ignored-interfaces:
