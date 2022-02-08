@@ -3,13 +3,13 @@ package com.invenia.erpservice.kafka.vacation;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.invenia.erpservice.api.user.UserEntity;
+import com.invenia.erpservice.api.user.UserNotFoundException;
+import com.invenia.erpservice.api.user.UserService;
 import com.invenia.erpservice.kafka.common.Topic;
 import com.invenia.erpservice.mattermost.AttachmentsItem;
 import com.invenia.erpservice.mattermost.Message;
 import com.invenia.erpservice.mattermost.Props;
-import com.invenia.erpservice.user.UserEntity;
-import com.invenia.erpservice.user.UserNotFoundException;
-import com.invenia.erpservice.user.UserService;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import lombok.RequiredArgsConstructor;
@@ -47,13 +47,13 @@ public class VacationConsumer {
     UserEntity user = userService.getUserByEmpSeq(payload.getEmpSeq()).orElseThrow(UserNotFoundException::new);
 
     if (user.getDeptSeq() == 2039) { // IT 개발파트
-      callMattermostAPI(payload, user.getUserName(), "wjowika97tbqxd31sgjmddqier");
+      sendVacationMessage(payload, user.getUserName(), "wjowika97tbqxd31sgjmddqier");
     } else if (user.getDeptSeq() == 1681) { // IT 팀
-      callMattermostAPI(payload, user.getUserName(), "35nctfyuzbyuj8hpu5qwnqmroh");
+      sendVacationMessage(payload, user.getUserName(), "35nctfyuzbyuj8hpu5qwnqmroh");
     }
   }
 
-  private void callMattermostAPI(VacationPayload payload, String userName, String channelId) {
+  private void sendVacationMessage(VacationPayload payload, String userName, String channelId) {
     String text = "";
     text += payload.getPrevUseDays().equals("AMNQ") ? "**[반차]** " : "";
     if (payload.getWkFrDate().equals(payload.getWkToDate())) {

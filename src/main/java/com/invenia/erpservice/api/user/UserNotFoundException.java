@@ -1,4 +1,4 @@
-package com.invenia.erpservice.user;
+package com.invenia.erpservice.api.user;
 
 import java.io.Serial;
 import lombok.RequiredArgsConstructor;

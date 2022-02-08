@@ -1,4 +1,4 @@
-package com.invenia.erpservice.user;
+package com.invenia.erpservice.api.user;
 
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

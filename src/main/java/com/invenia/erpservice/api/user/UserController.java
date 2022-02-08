@@ -1,4 +1,4 @@
-package com.invenia.erpservice.user;
+package com.invenia.erpservice.api.user;
 
 import com.invenia.erpservice.keycloak.KeycloakAdminService;
 import lombok.RequiredArgsConstructor;

@@ -5,16 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.invenia.erpservice.api.user.UserEntity;
+import com.invenia.erpservice.api.user.UserNotFoundException;
+import com.invenia.erpservice.api.user.UserRepository;
+import com.invenia.erpservice.api.user.UserService;
 import com.invenia.erpservice.kafka.common.Topic;
 import com.invenia.erpservice.kafka.user.UserPayload;
 import com.invenia.erpservice.kafka.vacation.VacationPayload;
 import com.invenia.erpservice.mattermost.AttachmentsItem;
 import com.invenia.erpservice.mattermost.Message;
 import com.invenia.erpservice.mattermost.Props;
-import com.invenia.erpservice.user.UserEntity;
-import com.invenia.erpservice.user.UserNotFoundException;
-import com.invenia.erpservice.user.UserRepository;
-import com.invenia.erpservice.user.UserService;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.Test;
@@ -32,11 +32,11 @@ import reactor.netty.http.client.HttpClient;
 @ActiveProfiles("dev")
 @SpringBootTest(classes = ErpServiceApplication.class, properties = {"spring.cloud.config.discovery.enabled:false"})
 
-public class KafkaTests {
+public class KafkaConsumerTests {
   // Test 실행 시 환경변수 ENCRYPT_KEY=damu 가 필요합니다.
   // todo 테스트 실행 시 환경변수 주입
 
-  Logger log = LoggerFactory.getLogger(KafkaTests.class);
+  Logger log = LoggerFactory.getLogger(KafkaConsumerTests.class);
 
   @Autowired
   UserRepository userRepository;

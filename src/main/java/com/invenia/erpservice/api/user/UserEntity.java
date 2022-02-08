@@ -1,4 +1,4 @@
-package com.invenia.erpservice.user;
+package com.invenia.erpservice.api.user;
 
 import java.time.Instant;
 import javax.persistence.Column;
