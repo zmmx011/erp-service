@@ -28,7 +28,7 @@ public class VacationConsumer {
 
   private final UserService userService;
 
-  @KafkaListener(topics = "erp_TPRWkEmpVacApp")
+  @KafkaListener(topics = "erp-vacation-approval")
   public void vacationListener(String topicMessage) {
     Topic<VacationPayload> topic = new Topic<>();
     try {
@@ -54,8 +54,7 @@ public class VacationConsumer {
   }
 
   private void sendVacationMessage(VacationPayload payload, String userName, String channelId) {
-    String text = "";
-    text += payload.getPrevUseDays().equals("AMNQ") ? "**[반차]** " : "";
+    String text = "**[" + payload.getWkItemName() + "]** ";
     if (payload.getWkFrDate().equals(payload.getWkToDate())) {
       text += LocalDate.parse(payload.getWkFrDate(), DateTimeFormatter.BASIC_ISO_DATE);
     } else {
