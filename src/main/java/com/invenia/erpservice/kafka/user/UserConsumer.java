@@ -38,6 +38,8 @@ public class UserConsumer extends AbstractConsumerSeekAware {
     // Topic 본문
     UserPayload payload = topic.getPayload();
 
+    log.debug("User Payload ==> " + payload);
+
     // keycloak
     keycloakAdminService.syncUser(
         payload.getUserId(),

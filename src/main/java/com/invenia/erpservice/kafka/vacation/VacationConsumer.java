@@ -54,6 +54,7 @@ public class VacationConsumer {
   }
 
   private void sendVacationMessage(VacationPayload payload, String userName, String channelId) {
+    log.debug("Vacation Payload ==> " + payload);
     String text = "**[" + payload.getWkItemName() + "]** ";
     if (payload.getWkFrDate().equals(payload.getWkToDate())) {
       text += LocalDate.parse(payload.getWkFrDate(), DateTimeFormatter.BASIC_ISO_DATE);
