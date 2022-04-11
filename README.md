@@ -59,19 +59,18 @@ Content-Type: application/json
 Content-Length: 577
 
 {
-    "name": "erp-vacation",
+    "name": "erp-vacation-approval",
     "config": {
         "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
         "connection.url":"jdbc:sqlserver://100.100.10.192:14233;database=INVENIA",
         "connection.user":"genuine",
         "connection.password":"Invenia209#",
         "mode": "incrementing",
+        "query": "SELECT*FROM(SELECT app.EmpSeq,app.VacSeq,item.WkItemName,app.WkFrDate,app.WkToDate,app.VacReason from _TPRWkEmpVacApp app JOIN _TPRWkItem item ON app.WkItemSeq=item.WkItemSeq JOIN(SELECT IsEnd,CONVERT(numeric,SUBSTRING(TblKey,CHARINDEX(',',TblKey)+1,LEN(TblKey)-CHARINDEX(',',TblKey)-1))AS VacSeq FROM _TComGroupWare WHERE WorkKind='EmpVac')gw ON app.VacSeq=gw.VacSeq WHERE gw.IsEnd='1')as t ORDER BY VacSeq DESC",
         "incrementing.column.name": "VacSeq",
         "validate.non.null": false,
-        "table.whitelist":"_TPRWkEmpVacApp",
-        "topic.prefix" : "erp",
-        "tasks.max": "1",
-        "numeric.mapping": "best_fit_eager_double"
+        "topic.prefix" : "erp-vacation-approval",
+        "tasks.max": "1"
     }
 }
 ```
