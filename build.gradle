@@ -14,6 +14,7 @@ jib {
     from.image = 'eclipse-temurin:17-jre-alpine'
     to.image = 'kds.inveniacorp.com/dev/erp-service/erp-service'
     to.tags = ['latest']
+    container.creationTime = "USE_CURRENT_TIMESTAMP"
 }
 
 configurations {

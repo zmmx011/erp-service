@@ -46,9 +46,9 @@ public class VacationConsumer {
 
     UserEntity user = userService.getUserByEmpSeq(payload.getEmpSeq()).orElseThrow(UserNotFoundException::new);
 
-    if (user.getDeptSeq() == 2039) { // IT 개발파트
+    if (user.getDeptSeq() == 2112) { // IT 개발팀
       sendVacationMessage(payload, user.getUserName(), "wjowika97tbqxd31sgjmddqier");
-    } else if (user.getDeptSeq() == 1681) { // IT 팀
+    } else if (user.getDeptSeq() == 2114) { // IT 운영팀
       sendVacationMessage(payload, user.getUserName(), "35nctfyuzbyuj8hpu5qwnqmroh");
     }
   }

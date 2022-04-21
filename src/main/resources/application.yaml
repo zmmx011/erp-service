@@ -17,6 +17,7 @@ spring:
         - eth0*
         - eth2*
     config:
+      fail-fast: true # 실패시 재시도
       discovery:
         enabled: true # 유레카에서 검색
   jpa:
