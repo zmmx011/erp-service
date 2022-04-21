@@ -13,4 +13,5 @@ public class VacationPayload {
   private String wkFrDate;
   private String wkToDate;
   private String vacReason;
+  private Integer isEnd;
 }
