@@ -100,8 +100,7 @@ public class KafkaConsumerTests {
     VacationPayload payload = topic.getPayload();
     UserEntity user = userService.getUserByEmpSeq(payload.getEmpSeq()).orElseThrow(UserNotFoundException::new);
 
-    String text = "";
-    text += payload.getPrevUseDays().equals("AMNQ") ? "**[반차]** " : "";
+    String text = "**[" + payload.getWkItemName() + "]** ";
     if (payload.getWkFrDate().equals(payload.getWkToDate())) {
       text += LocalDate.parse(payload.getWkFrDate(), DateTimeFormatter.BASIC_ISO_DATE);
     } else {
