@@ -2,6 +2,7 @@ package com.invenia.erpservice.kafka.vacation;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import java.util.Date;
 import lombok.Data;
 
 @Data
@@ -13,6 +14,6 @@ public class VacationPayload {
   private String wkFrDate;
   private String wkToDate;
   private String vacReason;
-  private Integer lastDateTime;
+  private Date lastDateTime;
   private Integer isEnd;
 }
