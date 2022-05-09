@@ -1,6 +1,9 @@
 # Default settings
 server:
   port: 8010
+  servlet:
+    context-path: /resource
+
 spring:
   config:
     import: "optional:configserver:http://configserver:8888"

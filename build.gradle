@@ -48,6 +48,8 @@ dependencies {
     implementation 'org.modelmapper:modelmapper:3.0.0'
     implementation 'com.github.chhsiao90:modelmapper-module-java8:1.2.1'
     implementation 'com.github.chhsiao90:modelmapper-module-jsr310:1.2.1'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.8'
+    implementation 'org.springdoc:springdoc-openapi-security:1.6.8'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
